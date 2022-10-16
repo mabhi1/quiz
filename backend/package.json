@@ -4,9 +4,13 @@
     "description": "backend for quiz",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
+        "start": "nodemon index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "abhishek_mishra",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "nodemon": "^2.0.20"
+    }
 }
