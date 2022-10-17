@@ -1,11 +1,13 @@
 const userRoutes = require("./users");
-const quizRoutes = require("./quizes");
+const quizRoutes = require("./quizzes");
+const authRoutes = require("./auth");
 
 const constructorMethod = (app) => {
-    app.use("/", quizRoutes);
+    app.use("/quiz", quizRoutes);
     app.use("/user", userRoutes);
+    app.use("/auth", authRoutes);
     app.use("*", (req, res) => {
-        res.json({ Error: "Page not Found" });
+        res.status(404).json({ Error: "Page not Found" });
     });
 };
 
