@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Profile = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
     useEffect(() => {
-        if (user) navigate("/profile", { replace: true });
+        if (user === null) navigate("/signin");
     }, [navigate, user]);
-    return <div>Signup</div>;
+    if (user !== null) {
+        return <div>Profile</div>;
+    }
 };
 
-export default Signup;
+export default Profile;

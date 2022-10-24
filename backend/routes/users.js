@@ -73,7 +73,7 @@ router.put("/:id", async (req, res) => {
         const lastName = req.body.lastName;
         const profile = req.body.profile;
         const quiz = req.body.quiz;
-        await quizzes.getQuizById(quiz._id);
+        if (quiz) await quizzes.getQuizById(quiz._id);
         const user = await users.updateUserById(id, firstName, lastName, profile, quiz);
         res.status(200).json({ updatedUser: user });
     } catch (error) {

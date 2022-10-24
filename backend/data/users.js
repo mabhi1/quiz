@@ -57,7 +57,7 @@ const getUserByEmail = async (email) => {
 const getUserById = async (id) => {
     validator.stringValidator("id", id);
     try {
-        const user = await userSchema.findById(id).select("email quizzes status");
+        const user = await userSchema.findById(id);
         validator.emptyValidator(user, "Invalid user");
         return user;
     } catch (error) {
@@ -110,7 +110,7 @@ const getUserByEmailandPassword = async (email, password) => {
         validator.emptyValidator(user[0], "Invalid Credentials");
         if (!bcrypt.compare(user[0].password, password)) throw "Invalid Credentials";
         delete user[0].password;
-        return { _id: user[0]._id, email: user[0].email, quizzes: user[0].quizzes, status: user[0].status };
+        return user[0];
     } catch (error) {
         throw "Invalid Credentials";
     }

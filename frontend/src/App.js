@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Profile from "./components/Profile";
+import NotFound from "./components/NotFound";
 
 function App() {
     return (
@@ -17,6 +19,8 @@ function App() {
                         <Route path="/" element={<FrontPage />} />
                         <Route path="/signin" element={<Signin />} />
                         <Route path="/signup" element={<Signup />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
             </div>

@@ -28,7 +28,7 @@ router.get("/user", async (req, res) => {
     }
 });
 
-router.post("/logout", async (req, res) => {
+router.get("/logout", async (req, res) => {
     if (!req.session.userId) {
         res.status(400).json({ error: "No user logged in" });
         return;
