@@ -8,6 +8,11 @@ const credentialsValidator = (email, password) => {
     return;
 };
 
+const emailValidator = (email) => {
+    const found = email.match("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+    if (!found) throw "Invalid email type";
+};
+
 const emptyValidator = (data, message) => {
     if (!data) throw message;
     return;
@@ -17,4 +22,5 @@ module.exports = {
     stringValidator,
     credentialsValidator,
     emptyValidator,
+    emailValidator,
 };

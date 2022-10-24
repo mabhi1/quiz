@@ -9,19 +9,37 @@ router.get("/", async (req, res) => {
         const userList = await users.getAllUsers();
         res.status(200).json({ users: userList });
     } catch (error) {
-        res.status(400).json({ error: error });
+        res.status(404).json({ error: error });
+    }
+});
+
+router.get("/verify/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        validator.stringValidator("id", id);
+        const user = await users.verifyUserById(id);
+        res.status(200).json({ user: user });
+    } catch (error) {
+        res.status(500).json({ error: error });
     }
 });
 
 router.post("/", async (req, res) => {
+    let user;
     try {
         email = req.body.email;
         password = req.body.password;
         validator.credentialsValidator(email, password);
-        const user = await users.createUser(email, password);
+        user = await users.getUserByEmail(email);
+        if (user) {
+            res.status(400).json({ error: "Email already exists" });
+            return;
+        }
+        validator.emailValidator(email);
+        user = await users.createUser(email, password);
         res.status(200).json({ user: user });
     } catch (error) {
-        res.status(500).json({ error: error });
+        res.status(400).json({ error: error });
     }
 });
 
@@ -32,7 +50,7 @@ router.get("/:id", async (req, res) => {
         const user = await users.getUserById(id);
         res.status(200).json({ user: user });
     } catch (error) {
-        res.status(400).json({ error: error });
+        res.status(404).json({ error: error });
     }
 });
 

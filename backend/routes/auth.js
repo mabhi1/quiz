@@ -24,7 +24,7 @@ router.get("/user", async (req, res) => {
         validator.emptyValidator(user, "No user found");
         res.status(200).json({ loggedUser: user });
     } catch (error) {
-        res.status(500).json({ error: error });
+        res.status(400).json({ error: error });
     }
 });
 

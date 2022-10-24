@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
             takenOn: { type: Date, immutable: true, default: () => Date.now() },
         },
     ],
+    status: {
+        type: String,
+        default: "unverified",
+    },
     createdAt: {
         type: Date,
         immutable: true,
