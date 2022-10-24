@@ -15,6 +15,12 @@ const routes = require("./routes");
 const session = require("express-session");
 
 // Middlewares
+const cors = require("cors");
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+    })
+);
 app.use(
     session({
         name: "AuthCookie",
@@ -30,6 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 routes(app);
 
 // starting server
-app.listen(3000, () => {
-    console.log("Server started at http://localhost:3000/");
+const PORT = process.env.PORT || 4000;
+app.listen(4000, () => {
+    console.log(`Server started at http://localhost:${PORT}/`);
 });
