@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Python",
+        "totalQuestions": 2,
+        "questions": [
+            {
+                "question": "What is the maximum length of a Python identifier?",
+                "options": ["32", "16", "128", "No fixed length is specified"],
+                "answer": 4
+            },
+            {
+                "question": "What will be the output of the following code? print(2**3 + (5 + 6)**(1 + 1))",
+                "options": ["129", "8", "121", "None of the above"],
+                "answer": 1
+            }
+        ],
+        "courseLink": "https://www.w3schools.com/python/",
+        "imageLink": "https://www.pngitem.com/pimgs/m/31-312064_programming-icon-png-python-logo-512-transparent-png.png"
+    },
+    {
+        "name": "Java",
+        "totalQuestions": 2,
+        "questions": [
+            {
+                "question": "Number of primitive data types in Java are?",
+                "options": ["6", "7", "8", "9"],
+                "answer": 3
+            },
+            {
+                "question": "Automatic type conversion is possible in which of the possible cases?",
+                "options": ["Byte to Int", "Int to Long", "Long to Int", "Short to Int"],
+                "answer": 2
+            }
+        ],
+        "courseLink": "https://www.w3schools.com/java/",
+        "imageLink": "https://i.stack.imgur.com/Lqh07.png"
+    }
+]

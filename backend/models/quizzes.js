@@ -8,6 +8,7 @@ const quizSchema = new mongoose.Schema({
     totalQuestions: Number,
     questions: [{ question: String, options: [String], answer: Number }],
     courseLink: String,
+    imageLink: String,
     createdAt: {
         type: Date,
         immutable: true,

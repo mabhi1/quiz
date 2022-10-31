@@ -14,9 +14,17 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        name = req.body.name;
+        const name = req.body.name;
+        const questions = req.body.questions;
+        const courseLink = req.body.courseLink;
+        const imageLink = req.body.imageLink;
+        validator.emptyValidator(name, "Invalid name");
+        validator.emptyValidator(questions, "Invalid questions");
+        validator.emptyValidator(courseLink, "Invalid courseLink");
+        validator.emptyValidator(imageLink, "Invalid imageLink");
+        const totalQuestions = req.body.questions.length;
         validator.stringValidator("name", name);
-        const quiz = await quizzes.createQuiz(name);
+        const quiz = await quizzes.createQuiz(name, totalQuestions, questions, courseLink, imageLink);
         res.status(200).json({ quiz: quiz });
     } catch (error) {
         res.status(500).json({ error: error });
@@ -50,10 +58,12 @@ router.put("/:id", async (req, res) => {
         const id = req.params.id;
         validator.stringValidator("id", id);
         const questions = req.body.questions;
-        const totalQuestions = null;
+        let totalQuestions = null;
         if (questions) totalQuestions = req.body.questions.length;
         const courseLink = req.body.courseLink;
-        const quiz = await quizzes.updateQuizById(id, totalQuestions, questions, courseLink);
+        const name = req.body.name;
+        const imageLink = req.body.imageLink;
+        const quiz = await quizzes.updateQuizById(id, totalQuestions, questions, courseLink, imageLink, name);
         res.status(200).json({ updatedQuiz: quiz });
     } catch (error) {
         res.status(500).json({ error: error });

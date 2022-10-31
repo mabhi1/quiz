@@ -1,0 +1,19 @@
+[
+    {
+        "email": "mabhishek0221@gmail.com",
+        "firstName": "Abhishek",
+        "lastName": "Mishra",
+        "password": "pass@123",
+        "profile": "",
+        "quizzes": []
+    },
+    {
+        "email": "admin@quiz.com",
+        "firstName": "admin",
+        "lastName": "admin",
+        "password": "pass@123",
+        "profile": "",
+        "status": "verified",
+        "quizzes": []
+    }
+]

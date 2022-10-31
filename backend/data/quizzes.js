@@ -21,11 +21,15 @@ const getAllQuizzes = async () => {
     }
 };
 
-const createQuiz = async (name) => {
+const createQuiz = async (name, totalQuestions, questions, courseLink, imageLink) => {
     try {
-        validator.stringValidator("quiz name", name);
+        validator.stringValidator("quiz name", name, totalQuestions, questions, courseLink, imageLink);
         const quiz = await quizSchema.create({
             name: name,
+            totalQuestions: totalQuestions,
+            questions: questions,
+            courseLink: courseLink,
+            imageLink: imageLink,
         });
         validator.emptyValidator(quiz, "Could not create quiz");
         return quiz;
@@ -44,12 +48,14 @@ const deleteQuizById = async (id) => {
     }
 };
 
-const updateQuizById = async (id, totalQuestions, questions, courseLink) => {
+const updateQuizById = async (id, totalQuestions, questions, courseLink, imageLink, name) => {
     try {
         const quiz = await getQuizById(id);
         if (totalQuestions) quiz.totalQuestions = totalQuestions;
         if (questions) quiz.questions = questions;
         if (courseLink) quiz.courseLink = courseLink;
+        if (imageLink) quiz.imageLink = imageLink;
+        if (name) quiz.name = name;
         await quiz.save();
         return quiz;
     } catch (error) {

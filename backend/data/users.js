@@ -77,7 +77,7 @@ const deleteUserById = async (id) => {
 
 const getAllUsers = async () => {
     try {
-        const users = await userSchema.find({}).select("email quizzes");
+        const users = await userSchema.find({}).select("email quizzes firstName lastName");
         if (users.length == 0) throw "No users found";
         for (let user of users) {
             delete user.password;

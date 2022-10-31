@@ -8,7 +8,7 @@ const Profile = () => {
     useEffect(() => {
         if (user === null) navigate("/signin");
     }, [navigate, user]);
-    if (user !== null) {
+    if (user !== null && user !== "nouser") {
         return <div>Profile</div>;
     }
 };
