@@ -1,19 +1,31 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 
+const classes = {
+    input: "mx-2 mb-4 p-2 px-3 rounded border-slate-300 border-2",
+    form: "flex flex-col w-96",
+    button: "m-2 cursor-pointer bg-fuchsia-800 text-slate-50 p-1 px-3 rounded transition hover:bg-fuchsia-700",
+    label: "px-2 text-sm",
+    header: "text-xl my-10 bg-slate-100 rounded p-3 px-4",
+};
 const Signin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     useEffect(() => {
-        if (user) navigate("/profile", { replace: true });
+        if (user && user !== "nouser") navigate("/profile", { replace: true });
     }, [navigate, user]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { email, password } = e.target.elements;
+        if (!email.value || !password.value) {
+            alert("All the fields are required");
+            email.focus();
+            return;
+        }
         try {
             const { data } = await axios.post(
                 "http://localhost:4000/auth/login",
@@ -25,21 +37,35 @@ const Signin = () => {
                 }
             );
             dispatch(actions.signIn(data.user));
-        } catch (error) {}
+        } catch (error) {
+            alert(error.response.data.error);
+            email.focus();
+        }
     };
     if (user === null) {
         return (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input name="email" type="email" id="email" />
-                    <br />
-                    <br />
-                    <input name="password" type="password" id="password" />
-                    <br />
-                    <br />
-                    <input type="submit" value="submit" />
-                </form>
-            </div>
+            <>
+                <h2 className={classes.header}>Sign In</h2>
+                <div className="flex flex-col items-center">
+                    <form onSubmit={handleSubmit} className={classes.form}>
+                        <label htmlFor="email" className={classes.label}>
+                            Email
+                        </label>
+                        <input name="email" type="email" id="email" className={classes.input} placeholder="Enter your email" />
+                        <label htmlFor="password" className={classes.label}>
+                            Password
+                        </label>
+                        <input name="password" type="password" id="password" className={classes.input} placeholder="Enter your password" />
+                        <input type="submit" value="Sign in" className={classes.button} />
+                    </form>
+                    <span>
+                        Don't have an account?{" "}
+                        <Link to="/signup" className="text-blue-800">
+                            Click to Sign up
+                        </Link>
+                    </span>
+                </div>
+            </>
         );
     }
 };

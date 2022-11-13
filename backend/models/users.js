@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    profile: String,
     quizzes: [
         {
             _id: { type: mongoose.SchemaTypes.ObjectId, ref: "quizzes" },

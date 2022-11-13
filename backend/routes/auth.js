@@ -10,6 +10,7 @@ router.post("/login", async (req, res) => {
         const password = req.body.password;
         const user = await users.getUserByEmailandPassword(email, password);
         validator.emptyValidator(user, "No user found");
+        if (user.status === "unverified") throw "Please check your inbox to verify email before signing in";
         req.session.userId = user._id;
         res.status(200).json({ user: user });
     } catch (error) {

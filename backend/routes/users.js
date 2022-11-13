@@ -29,14 +29,18 @@ router.post("/", async (req, res) => {
     try {
         email = req.body.email;
         password = req.body.password;
+        firstName = req.body.firstName;
+        lastName = req.body.lastName;
         validator.credentialsValidator(email, password);
+        validator.emptyValidator(firstName, "Invalid First Name");
+        validator.emptyValidator(lastName, "Invalid Last Name");
         user = await users.getUserByEmail(email);
         if (user) {
             res.status(400).json({ error: "Email already exists" });
             return;
         }
         validator.emailValidator(email);
-        user = await users.createUser(email, password);
+        user = await users.createUser(email, password, firstName, lastName);
         res.status(200).json({ user: user });
     } catch (error) {
         res.status(400).json({ error: error });

@@ -4,13 +4,15 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const transporter = require("../config/nodemailer");
 
-const createUser = async (email, password) => {
+const createUser = async (email, password, firstName, lastName) => {
     try {
         validator.credentialsValidator(email, password);
         validator.emailValidator(email);
         const user = await userSchema.create({
             email: email,
             password: await bcrypt.hash(password, saltRounds),
+            firstName: firstName,
+            lastName: lastName,
         });
         validator.emptyValidator(user, "Unable to create user");
         const text = "Click on the link http://localhost:3000/user/verify/" + user._id + " to verify your id";
@@ -108,7 +110,7 @@ const getUserByEmailandPassword = async (email, password) => {
         validator.credentialsValidator(email, password);
         const user = await userSchema.where("email").equals(email);
         validator.emptyValidator(user[0], "Invalid Credentials");
-        if (!bcrypt.compare(user[0].password, password)) throw "Invalid Credentials";
+        if (!(await bcrypt.compare(password, user[0].password))) throw "Invalid Credentials";
         delete user[0].password;
         return user[0];
     } catch (error) {

@@ -4,7 +4,6 @@
         "firstName": "Abhishek",
         "lastName": "Mishra",
         "password": "pass@123",
-        "profile": "",
         "quizzes": []
     },
     {
@@ -12,7 +11,6 @@
         "firstName": "admin",
         "lastName": "admin",
         "password": "pass@123",
-        "profile": "",
         "status": "verified",
         "quizzes": []
     }

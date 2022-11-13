@@ -9,6 +9,7 @@ import NotFound from "./components/NotFound";
 import Dashboard from "./components/Admin/Dashboard";
 import Footer from "./components/Footer";
 import EditQuiz from "./components/Admin/EditQuiz";
+import VerifyUser from "./components/VerifyUser";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/edit/:id" element={<EditQuiz />} />
+                            <Route path="/user/verify/:id" element={<VerifyUser />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>
