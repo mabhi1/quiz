@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import actions from "../actions";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { AiFillEye } from "react-icons/ai";
 
 const classes = {
-    input: "mx-2 mb-4 p-2 px-3 rounded border-slate-300 border-2",
+    input: "mx-2 p-2 px-3 rounded border-slate-300 border-2",
     form: "flex flex-col w-96",
     button: "m-2 cursor-pointer bg-fuchsia-800 text-slate-50 p-1 px-3 rounded transition hover:bg-fuchsia-700",
     label: "px-2 text-sm",
-    header: "text-xl my-10 bg-slate-100 rounded p-3 px-4",
+    header: "text-xl my-5 bg-slate-100 rounded p-2 px-3",
 };
 const Signin = () => {
     const navigate = useNavigate();
@@ -42,6 +43,14 @@ const Signin = () => {
             email.focus();
         }
     };
+    const showPassword = () => {
+        const password = document.getElementById("password");
+        password.type === "password" ? (password.type = "text") : (password.type = "password");
+    };
+    const handleReset = (e) => {
+        e.preventDefault();
+        alert("Password Reset");
+    };
     if (user === null) {
         return (
             <>
@@ -52,11 +61,18 @@ const Signin = () => {
                             Email
                         </label>
                         <input name="email" type="email" id="email" className={classes.input} placeholder="Enter your email" />
-                        <label htmlFor="password" className={classes.label}>
+                        <label htmlFor="password" className={classes.label + " mt-5"}>
                             Password
                         </label>
                         <input name="password" type="password" id="password" className={classes.input} placeholder="Enter your password" />
-                        <input type="submit" value="Sign in" className={classes.button} />
+                        <AiFillEye className="self-end mr-[20px] mt-[-28px] mb-[12px] cursor-pointer" onClick={showPassword} />
+                        <span className="text-sm mx-2">
+                            Forgot your password?{" "}
+                            <button className="text-blue-800" onClick={handleReset}>
+                                Click to reset
+                            </button>
+                        </span>
+                        <input type="submit" value="Sign in" className={classes.button + " mt-5"} />
                     </form>
                     <span>
                         Don't have an account?{" "}

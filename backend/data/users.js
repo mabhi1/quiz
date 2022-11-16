@@ -91,12 +91,13 @@ const getAllUsers = async () => {
     }
 };
 
-const updateUserById = async (id, firstName, lastName, profile, quiz) => {
+const updateUserById = async (id, firstName, lastName, profile, quiz, password) => {
     try {
         const user = await userSchema.findById(id);
         if (firstName) user.firstName = firstName;
         if (lastName) user.lastName = lastName;
         if (profile) user.profile = profile;
+        if (password) user.password = await bcrypt.hash(password, saltRounds);
         if (quiz) {
             for (let i = 0; i < user.quizzes.length; i++) {
                 if (user.quizzes[i]._id == quiz._id) {

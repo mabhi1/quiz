@@ -77,8 +77,9 @@ router.put("/:id", async (req, res) => {
         const lastName = req.body.lastName;
         const profile = req.body.profile;
         const quiz = req.body.quiz;
+        const password = req.body.password;
         if (quiz) await quizzes.getQuizById(quiz._id);
-        const user = await users.updateUserById(id, firstName, lastName, profile, quiz);
+        const user = await users.updateUserById(id, firstName, lastName, profile, quiz, password);
         res.status(200).json({ updatedUser: user });
     } catch (error) {
         res.status(500).json({ error: error });

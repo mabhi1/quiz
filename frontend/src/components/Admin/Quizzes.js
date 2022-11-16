@@ -31,7 +31,7 @@ const Quizzes = () => {
         <div className="w-full">
             <button
                 onClick={() => navigate("/edit/new")}
-                className="text-slate-500 bg-slate-200 p-2 px-3 hover:border-slate-500 hover:text-slate-50 hover:bg-slate-400 border-2 border-slate-200 rounded transition hover:bg-slate-100 ml-2 mr-5"
+                className="text-slate-500 bg-slate-200 p-2 px-3 hover:border-slate-500 hover:text-slate-900 hover:bg-slate-400 border-2 border-slate-200 rounded transition hover:bg-slate-100 ml-2 mr-5"
             >
                 Add a quiz
             </button>

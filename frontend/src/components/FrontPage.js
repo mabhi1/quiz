@@ -27,7 +27,7 @@ const FrontPage = () => {
 
     return (
         <div>
-            <input type="text" name="search" className="w-full border-2 rounded p-2" placeholder="Search Quizzes" onChange={handleChange} />
+            <input type="text" name="search" className="w-full border-2 rounded p-1 px-2" placeholder="Search Quizzes" onChange={handleChange} />
             {searchTerm.length > 0 ? <QuizData quizzes={searchData} /> : <QuizData quizzes={data?.quizList} />}
         </div>
     );

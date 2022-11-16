@@ -8,7 +8,7 @@ const classes = {
     form: "flex flex-col w-96",
     button: "m-2 cursor-pointer bg-fuchsia-800 text-slate-50 p-1 px-3 rounded transition hover:bg-fuchsia-700",
     label: "px-2 text-sm",
-    header: "text-xl my-10 bg-slate-100 rounded p-3 px-4",
+    header: "text-xl my-5 bg-slate-100 rounded p-2 px-3",
 };
 const Signup = () => {
     const navigate = useNavigate();
@@ -18,10 +18,15 @@ const Signup = () => {
     }, [navigate, user]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { firstName, lastName, email, password } = e.target.elements;
+        const { firstName, lastName, email, password, password2 } = e.target.elements;
         if (!firstName.value || !lastName.value || !email.value || !password.value) {
             alert("All the fields are required");
             firstName.focus();
+            return;
+        }
+        if (password.value !== password2.value) {
+            alert("Password does not match");
+            password.focus();
             return;
         }
         try {
@@ -67,6 +72,10 @@ const Signup = () => {
                             Password
                         </label>
                         <input name="password" type="password" id="password" className={classes.input} placeholder="Enter your password" />
+                        <label htmlFor="password2" className={classes.label}>
+                            Re-type Password
+                        </label>
+                        <input name="password2" type="text" id="password2" className={classes.input} placeholder="Re-type your password" />
 
                         <input type="submit" value="Sign up" className={classes.button} />
                     </form>
