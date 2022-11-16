@@ -25,7 +25,7 @@ const Signup = () => {
             return;
         }
         try {
-            const { data } = await axios.post(
+            await axios.post(
                 "http://localhost:4000/user",
                 { email: email.value, password: password.value, firstName: firstName.value, lastName: lastName.value },
                 {

@@ -3,6 +3,7 @@ const validator = require("../validator/validator");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const transporter = require("../config/nodemailer");
+const mongoose = require("mongoose");
 
 const createUser = async (email, password, firstName, lastName) => {
     try {
@@ -96,10 +97,17 @@ const updateUserById = async (id, firstName, lastName, profile, quiz) => {
         if (firstName) user.firstName = firstName;
         if (lastName) user.lastName = lastName;
         if (profile) user.profile = profile;
-        if (quiz) user.quizzes.push(quiz);
+        if (quiz) {
+            for (let i = 0; i < user.quizzes.length; i++) {
+                if (user.quizzes[i]._id == quiz._id) {
+                    user.quizzes.splice(i, 1);
+                }
+            }
+            user.quizzes.push(quiz);
+        }
         await user.save();
         delete user.password;
-        return { _id: user._id, email: user.email, quizzes: user.quizzes };
+        return { _id: user._id, email: user.email, quizzes: user.quizzes, firstName: user.firstName, lastName: user.lastName };
     } catch (error) {
         throw "Could not update user";
     }

@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         {
             _id: { type: mongoose.SchemaTypes.ObjectId, ref: "quizzes" },
             marks: Number,
-            takenOn: { type: Date, immutable: true, default: () => Date.now() },
+            takenOn: { type: Date },
         },
     ],
     status: {

@@ -8,7 +8,7 @@ import axios from "axios";
 const classes = {
     li: "mx-5 relative",
     icons: "mr-1",
-    a: "flex items-center after:content-[''] after:absolute after:bg-slate-900 after:h-0.5 after:left-0 after:w-0 after:top-6 after:transition-all after:duration-300 hover:after:w-full",
+    a: "cursor-pointer flex items-center after:content-[''] after:absolute after:bg-slate-900 after:h-0.5 after:left-0 after:w-0 after:top-6 after:transition-all after:duration-300 hover:after:w-full",
 };
 const Navbar = () => {
     const navigate = useNavigate();
@@ -40,8 +40,8 @@ const Navbar = () => {
         <>
             <img src="https://quadlayers.com/wp-content/uploads/2020/02/quiz-plugins-for-WordPress.png" alt="quiz app" width="150px" />
             <nav>
-                <ul className="flex cursor-pointer">
-                    {user && <li className={classes.li}>Welcome, {user.firstName ? user.firstName : user.email}</li>}
+                <ul className="flex">
+                    {user && <li className={classes.li + " cursor-default"}>Welcome, {user.firstName ? user.firstName : user.email}</li>}
                     <li className={classes.li}>
                         <Link to="/" className={classes.a}>
                             <FaHome className={classes.icons} />

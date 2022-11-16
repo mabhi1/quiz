@@ -9,7 +9,7 @@ const VerifyUser = () => {
     useEffect(() => {
         async function verifyUser() {
             try {
-                const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL + "/user/verify/" + id);
+                await axios.get(process.env.REACT_APP_BACKEND_URL + "/user/verify/" + id);
                 setVerify(true);
             } catch (error) {
                 if (error.response.data.error === "User already verified") {

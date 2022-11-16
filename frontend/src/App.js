@@ -10,6 +10,7 @@ import Dashboard from "./components/Admin/Dashboard";
 import Footer from "./components/Footer";
 import EditQuiz from "./components/Admin/EditQuiz";
 import VerifyUser from "./components/VerifyUser";
+import QuizPage from "./components/QuizPage";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/edit/:id" element={<EditQuiz />} />
                             <Route path="/user/verify/:id" element={<VerifyUser />} />
+                            <Route path="/quiz/:id" element={<QuizPage />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>
