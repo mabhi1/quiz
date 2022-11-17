@@ -29,7 +29,7 @@ const Signin = () => {
         }
         try {
             const { data } = await axios.post(
-                "http://localhost:4000/auth/login",
+                process.env.REACT_APP_BACKEND_URL + "/auth/login",
                 { email: email.value, password: password.value },
                 {
                     "Content-Type": "application/json",
@@ -47,9 +47,27 @@ const Signin = () => {
         const password = document.getElementById("password");
         password.type === "password" ? (password.type = "text") : (password.type = "password");
     };
-    const handleReset = (e) => {
-        e.preventDefault();
-        alert("Password Reset");
+    const handleReset = async () => {
+        const email = document.getElementById("email");
+        if (email.value === "") {
+            alert("Enter an email to reset password");
+            return;
+        }
+        try {
+            await axios.post(
+                process.env.REACT_APP_BACKEND_URL + "/user/reset",
+                { email: email.value },
+                {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    withCredentials: true,
+                }
+            );
+        } catch (error) {
+            console.log(error);
+            email.focus();
+        }
+        alert("You will receive an email to reset your password if an account exists with your email");
     };
     if (user === null) {
         return (
@@ -68,7 +86,7 @@ const Signin = () => {
                         <AiFillEye className="self-end mr-[20px] mt-[-28px] mb-[12px] cursor-pointer" onClick={showPassword} />
                         <span className="text-sm mx-2">
                             Forgot your password?{" "}
-                            <button className="text-blue-800" onClick={handleReset}>
+                            <button className="text-blue-800" type="button" onClick={handleReset}>
                                 Click to reset
                             </button>
                         </span>

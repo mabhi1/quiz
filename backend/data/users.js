@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const transporter = require("../config/nodemailer");
 const mongoose = require("mongoose");
+const authSchema = require("../models/auth");
 
 const createUser = async (email, password, firstName, lastName) => {
     try {
@@ -33,6 +34,35 @@ const createUser = async (email, password, firstName, lastName) => {
         return { _id: user._id, email: user.email, quizzes: user.quizzes };
     } catch (error) {
         throw "Unable to create user";
+    }
+};
+
+const resetPassword = async (id, email) => {
+    await authSchema.create({
+        authId: id,
+    });
+    try {
+        const text =
+            "Click on the link http://localhost:3000/user/resetpassword/" +
+            id.toString() +
+            " to reset you password. This link expires after 24 hours";
+        const mailOptions = {
+            from: "no-reply@quiz.com",
+            to: email,
+            subject: "Reset your password",
+            text: text,
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent " + info.response);
+            }
+        });
+        return;
+    } catch (error) {
+        console.log(error);
+        throw "No user found";
     }
 };
 
@@ -136,4 +166,5 @@ module.exports = {
     getUserByEmailandPassword,
     getUserByEmail,
     verifyUserById,
+    resetPassword,
 };

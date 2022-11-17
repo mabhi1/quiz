@@ -13,6 +13,19 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.post("/reset", async (req, res) => {
+    try {
+        const email = req.body.email;
+        validator.stringValidator("email", email);
+        const user = await users.getUserByEmail(email);
+        validator.emptyValidator(user, "No user found");
+        await users.resetPassword(user._id, email);
+        res.status(200).json({ message: "successful" });
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+});
+
 router.get("/verify/:id", async (req, res) => {
     try {
         const id = req.params.id;

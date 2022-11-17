@@ -41,7 +41,9 @@ const Navbar = () => {
             <img src="https://quadlayers.com/wp-content/uploads/2020/02/quiz-plugins-for-WordPress.png" alt="quiz app" width="150px" />
             <nav>
                 <ul className="flex">
-                    {user && <li className={classes.li + " cursor-default"}>Welcome, {user.firstName ? user.firstName : user.email}</li>}
+                    {user && user !== "nouser" && (
+                        <li className={classes.li + " cursor-default"}>Welcome, {user.firstName ? user.firstName : user.email}</li>
+                    )}
                     <li className={classes.li}>
                         <Link to="/" className={classes.a}>
                             <FaHome className={classes.icons} />
@@ -56,7 +58,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                     )}
-                    {user !== null ? (
+                    {user !== null && user !== "nouser" ? (
                         <>
                             <li className={classes.li}>
                                 <Link to="/profile" className={classes.a}>

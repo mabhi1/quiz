@@ -54,7 +54,7 @@ const Profile = () => {
         e.preventDefault();
         const { password1, password2 } = e.target.elements;
         if (password1.value !== password2.value) {
-            alert("Password does not match");
+            alert("Passwords do not match");
             password1.focus();
             return;
         }
@@ -136,27 +136,31 @@ const Profile = () => {
                     </div>
                     <input type="submit" value="Submit" className={classes.button + " " + classes.green} />
                 </form>
-                <div>
-                    <p className="flex mt-5 justify-center">
-                        <FaFontAwesome className="m-1" />
-                        Attempted Quizzes
-                    </p>
-                    <table className="my-3 w-full text-center">
-                        <thead className="font-medium">
-                            <tr className="underline underline-offset-2">
-                                <td>Quiz</td>
-                                <td>Score</td>
-                                <td>Attempted on</td>
-                                <td>Tutorial</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {user.quizzes.map((quiz) => {
-                                return <ProfileQuiz quiz={quiz} key={quiz.takenOn} />;
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                {user.quizzes.length > 0 ? (
+                    <div>
+                        <p className="flex mt-5 justify-center">
+                            <FaFontAwesome className="m-1" />
+                            Attempted Quizzes
+                        </p>
+                        <table className="my-3 w-full text-center">
+                            <thead className="font-medium">
+                                <tr className="underline underline-offset-2">
+                                    <td>Quiz</td>
+                                    <td>Score</td>
+                                    <td>Attempted on</td>
+                                    <td>Tutorial</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {user.quizzes.map((quiz) => {
+                                    return <ProfileQuiz quiz={quiz} key={quiz.takenOn} />;
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <div className="text-center pt-5">No quiz attempted</div>
+                )}
             </div>
         );
     }

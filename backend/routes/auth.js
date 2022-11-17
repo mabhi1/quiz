@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const users = require("../data/users");
 const validator = require("../validator/validator");
+const auth = require("../data/auth");
 
 router.post("/login", async (req, res) => {
     try {
@@ -36,6 +37,19 @@ router.get("/logout", async (req, res) => {
     }
     req.session.destroy();
     res.status(200).json({ message: "user logged out successfully" });
+});
+
+router.get("/:authId", async (req, res) => {
+    try {
+        const authId = req.params.authId;
+        validator.stringValidator("authId", authId);
+        const authData = await auth.getAuthById(authId);
+        await auth.deleteAuthById(authData._id);
+        if (Date.now() - new Date(authData.createdAt).getTime() > 1000 * 60 * 1) throw "Link Expired";
+        res.status(200).json({ auth: authData });
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
 });
 
 module.exports = router;
