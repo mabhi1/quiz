@@ -1,17 +1,18 @@
 [
     {
-        "email": "mabhishek0221@gmail.com",
-        "firstName": "Abhishek",
-        "lastName": "Mishra",
-        "password": "pass@123",
+        "email": "testuser@quiz.com",
+        "firstName": "FirstName",
+        "lastName": "LastName",
+        "status": "verified",
+        "password": "$2b$10$xBLSzEHVIT.C2YK7F66tHefCO3vMGn41H1g.v6BtWEbiwwUZNApOq",
         "quizzes": []
     },
     {
         "email": "admin@quiz.com",
         "firstName": "admin",
         "lastName": "admin",
-        "password": "pass@123",
         "status": "verified",
+        "password": "$2b$10$7GoBoL/6ZZCvlFCtwF8WnubKkm3icYNNw1QjR0xuPehbqKFBfth7.",
         "quizzes": []
     }
 ]
