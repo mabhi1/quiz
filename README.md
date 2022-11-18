@@ -2,7 +2,7 @@
 
 A quiz app where users can play quizzes of various programming languages and databases
 
-## Hosted Link - https://quizapp-node.herokuapp.com/(https://quizapp-node.herokuapp.com/)
+## Hosted Link - https://quizapp-node.herokuapp.com/
 
 ### A. Mandatory steps
 
