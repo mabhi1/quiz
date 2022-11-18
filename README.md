@@ -8,9 +8,10 @@ A quiz app where users can play quizzes of various programming languages and dat
 
 1. Pull the code from github
 2. Go to backend and run `npm install` to install dependencies
-3. Start the server by running `npm start`
-4. Go to frontend and run `npm install` to install dependencies
-5. Start the client by running `npm start`
+3. Run `npm run seed` to initialize the database with test data
+4. Start the server by running `npm start`
+5. Go to frontend and run `npm install` to install dependencies
+6. Start the client by running `npm start`
 
 ### B. Login Credentials
 
