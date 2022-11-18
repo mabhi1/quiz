@@ -9,8 +9,7 @@
     "scripts": {
         "start": "nodemon index.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "seed": "node tasks/seeder.js",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+        "seed": "node tasks/seeder.js"
     },
     "author": "abhishek_mishra",
     "license": "ISC",
