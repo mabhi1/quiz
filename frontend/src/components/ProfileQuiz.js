@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 
 const ProfileQuiz = ({ quiz }) => {
+    const UsFormatter = new Intl.DateTimeFormat("en-US");
     const [quizData, setQuizData] = useState(null);
     useEffect(() => {
         async function getData() {
@@ -15,7 +16,7 @@ const ProfileQuiz = ({ quiz }) => {
         <tr>
             <td>{quizData?.name}</td>
             <td>{quiz.marks}</td>
-            <td>{quiz.takenOn.split("T")[0]}</td>
+            <td>{UsFormatter.format(new Date(quiz?.takenOn))}</td>
             <td>
                 <a href={quizData?.courseLink} target="_blank" rel="noreferrer">
                     <BiLinkExternal className="m-auto text-blue-800" />

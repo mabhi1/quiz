@@ -31,7 +31,7 @@ const Signup = () => {
         }
         try {
             await axios.post(
-                "http://localhost:4000/user",
+                `${process.env.REACT_APP_BACKEND_URL}/user`,
                 { email: email.value, password: password.value, firstName: firstName.value, lastName: lastName.value },
                 {
                     "Content-Type": "application/json",
@@ -44,9 +44,10 @@ const Signup = () => {
             password.value = "";
             firstName.value = "";
             lastName.value = "";
+            password2.value = "";
             firstName.focus();
         } catch (error) {
-            alert(error.response.data.error);
+            alert(error.response?.data.error);
             email.focus();
         }
     };

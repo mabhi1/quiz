@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const classes = {
-    li: "border-2 flex flex-col justify-between shadow-md w-32 items-center rounded m-2",
+    li: "border-2 flex flex-col justify-between shadow-md w-32 items-center rounded md:m-2 m-5",
     name: "w-full p-1 bg-slate-200 text-center",
     button: "bg-fuchsia-900 text-slate-50 p-1 px-2 m-1 rounded transition hover:bg-fuchsia-700",
     img: "m-5",
@@ -36,7 +36,7 @@ const QuizData = ({ quizzes, setSearchData, setData }) => {
         navigate("/edit/" + quizId);
     };
     return (
-        <ul className="flex mt-1">
+        <ul className="flex mt-1 flex-wrap justify-center md:justify-start">
             {quizzes &&
                 quizzes.map((quiz) => {
                     return (

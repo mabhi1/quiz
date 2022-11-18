@@ -17,7 +17,7 @@ const createUser = async (email, password, firstName, lastName) => {
             lastName: lastName,
         });
         validator.emptyValidator(user, "Unable to create user");
-        const text = "Click on the link http://localhost:3000/user/verify/" + user._id + " to verify your id";
+        const text = `Click on the link ${process.env.FRONTENDURL}/useraccount/` + user._id + " to verify your id";
         const mailOptions = {
             from: "no-reply@quiz.com",
             to: email,
@@ -43,7 +43,7 @@ const resetPassword = async (id, email) => {
     });
     try {
         const text =
-            "Click on the link http://localhost:3000/user/resetpassword/" +
+            `Click on the link ${process.env.FRONTENDURL}/user/resetpassword/` +
             id.toString() +
             " to reset you password. This link expires after 24 hours";
         const mailOptions = {

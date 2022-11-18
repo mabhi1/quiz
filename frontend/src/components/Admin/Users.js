@@ -39,20 +39,22 @@ const Users = () => {
     const mapUsers = (userList) => {
         return userList.map((user) => {
             return (
-                <li className={classes.li} key={user._id}>
-                    <details>
-                        <summary>{user.firstName ? user.firstName : user.email}</summary>
-                        <p>
-                            First Name : {user.firstName}
-                            <br />
-                            Last Name : {user.lastName}
-                            <br />
-                            Email : {user.email}
-                            <br />
-                        </p>
-                    </details>
-                    <MdDelete className="m-1 text-red-600 cursor-pointer" onClick={() => handleClick(user._id)} />
-                </li>
+                user.firstName !== "admin" && (
+                    <li className={classes.li} key={user._id}>
+                        <details>
+                            <summary className="cursor-pointer">{user.firstName ? user.firstName : user.email}</summary>
+                            <p>
+                                First Name : {user.firstName}
+                                <br />
+                                Last Name : {user.lastName}
+                                <br />
+                                Email : {user.email}
+                                <br />
+                            </p>
+                        </details>
+                        <MdDelete className="m-1 text-red-600 cursor-pointer" onClick={() => handleClick(user._id)} />
+                    </li>
+                )
             );
         });
     };
@@ -70,7 +72,7 @@ const Users = () => {
         );
     };
     return (
-        <div className="w-96 bg-slate-200 mr-5 p-1 px-3 min-h-[80vh]">
+        <div className="md:w-96 bg-slate-200 md:mr-5 p-1 px-3 pb-3 mb-5 md:min-h-[80vh]">
             <div className="m-5 text-center">Users</div>
             <input type="text" name="search" className="rounded p-2 w-full mb-2" placeholder="Search Users" onChange={handleChange} />
             <ul>{searchTerm.length >= 1 ? mapUsers(searchData) : mapUsers(users)}</ul>

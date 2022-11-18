@@ -18,7 +18,7 @@ function App() {
         <Router>
             <div className="font-['Helvetica'] bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
                 <span>
-                    <header className="px-5 py-1 flex items-center justify-around shadow-md">
+                    <header className="px-5 py-1 flex flex-col md:flex-row items-center justify-around shadow-md">
                         <Navbar />
                     </header>
                     <div className="p-5">
@@ -29,7 +29,7 @@ function App() {
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/edit/:id" element={<EditQuiz />} />
-                            <Route path="/user/verify/:id" element={<VerifyUser />} />
+                            <Route path="/useraccount/:id" element={<VerifyUser />} />
                             <Route path="/user/resetpassword/:id" element={<Reset />} />
                             <Route path="/quiz/:id" element={<QuizPage />} />
                             <Route path="*" element={<NotFound />} />

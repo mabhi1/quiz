@@ -3,10 +3,14 @@
     "version": "1.0.0",
     "description": "backend for quiz",
     "main": "index.js",
+    "engines": {
+        "node": "16.14.0"
+    },
     "scripts": {
         "start": "nodemon index.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "seed": "node tasks/seeder.js"
+        "seed": "node tasks/seeder.js",
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
     },
     "author": "abhishek_mishra",
     "license": "ISC",

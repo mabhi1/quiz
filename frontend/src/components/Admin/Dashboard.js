@@ -12,7 +12,7 @@ const Dashboard = () => {
     }, [navigate, user]);
     if (user && user.firstName === "admin") {
         return (
-            <div className="flex w-full">
+            <div className="flex md:flex-row flex-col w-full">
                 <Users />
                 <Quizzes />
             </div>

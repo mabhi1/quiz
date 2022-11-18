@@ -45,7 +45,7 @@ router.get("/:authId", async (req, res) => {
         validator.stringValidator("authId", authId);
         const authData = await auth.getAuthById(authId);
         await auth.deleteAuthById(authData._id);
-        if (Date.now() - new Date(authData.createdAt).getTime() > 1000 * 60 * 1) throw "Link Expired";
+        if (Date.now() - new Date(authData.createdAt).getTime() > 1000 * 60 * 60 * 24) throw "Link Expired";
         res.status(200).json({ auth: authData });
     } catch (error) {
         res.status(404).json({ error: error });

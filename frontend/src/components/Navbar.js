@@ -6,8 +6,8 @@ import actions from "../actions";
 import axios from "axios";
 
 const classes = {
-    li: "mx-5 relative",
-    icons: "mr-1",
+    li: "mx-2 md:mx-5 relative",
+    icons: "mr-1 hidden md:block",
     a: "cursor-pointer flex items-center after:content-[''] after:absolute after:bg-slate-900 after:h-0.5 after:left-0 after:w-0 after:top-6 after:transition-all after:duration-300 hover:after:w-full",
 };
 const Navbar = () => {
@@ -17,9 +17,15 @@ const Navbar = () => {
     useEffect(() => {
         async function getAxios() {
             try {
-                const { data } = await axios.get("http://localhost:4000/auth/user", { withCredentials: true });
+                const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/user`, {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
                 dispatch(actions.signIn(data.loggedUser));
             } catch (error) {
+                console.log(error);
                 dispatch(actions.signOut());
                 // console.log(error);
             }
@@ -29,7 +35,7 @@ const Navbar = () => {
     }, [dispatch]);
     const handleLogout = async () => {
         try {
-            await axios.get("http://localhost:4000/auth/logout", { withCredentials: true });
+            await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`, { withCredentials: true });
             dispatch(actions.signOut());
             navigate("/", { replace: true });
         } catch (error) {
@@ -42,7 +48,7 @@ const Navbar = () => {
             <nav>
                 <ul className="flex">
                     {user && user !== "nouser" && (
-                        <li className={classes.li + " cursor-default"}>Welcome, {user.firstName ? user.firstName : user.email}</li>
+                        <li className={classes.li + " cursor-default md:block hidden"}>Welcome, {user.firstName ? user.firstName : user.email}</li>
                     )}
                     <li className={classes.li}>
                         <Link to="/" className={classes.a}>
@@ -58,7 +64,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                     )}
-                    {user !== null && user !== "nouser" ? (
+                    {user !== null ? (
                         <>
                             <li className={classes.li}>
                                 <Link to="/profile" className={classes.a}>

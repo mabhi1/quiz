@@ -8,7 +8,7 @@ const FrontPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     useEffect(() => {
         async function getAxios() {
-            const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL + "/quiz");
+            const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/quiz`);
             setData(data);
         }
         getAxios();

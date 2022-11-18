@@ -18,19 +18,21 @@ const session = require("express-session");
 const cors = require("cors");
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: process.env.FRONTENDURL,
         optionsSuccessStatus: 200,
         credentials: true,
     })
 );
+
 app.use(
     session({
         name: "AuthCookie",
         secret: "sacredword",
-        resave: false,
         saveUninitialized: false,
+        resave: false,
     })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -38,7 +40,16 @@ app.use(express.urlencoded({ extended: true }));
 routes(app);
 
 // starting server
+
+if (process.env.NODE_ENV == "production") {
+    app.use(express.static("frontend/build"));
+    const path = require("path");
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+    });
+}
+
 const PORT = process.env.PORT || 4000;
-app.listen(4000, () => {
+app.listen(PORT, () => {
     console.log(`Server started at http://localhost:${PORT}/`);
 });

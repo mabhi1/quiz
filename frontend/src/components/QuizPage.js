@@ -6,6 +6,7 @@ import QuizModal from "./QuizModal";
 
 const QuizPage = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
+    const UsFormatter = new Intl.DateTimeFormat("en-US");
     const { id } = useParams();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
@@ -24,7 +25,7 @@ const QuizPage = () => {
         getData();
     }, [id]);
     useEffect(() => {
-        for (let i = 0; i < user.quizzes?.length; i++) {
+        for (let i = 0; i < user?.quizzes?.length; i++) {
             if (user.quizzes[i]?._id === quizData?._id) {
                 setLastTest({
                     lastAttempted: user.quizzes[i].takenOn,
@@ -59,7 +60,8 @@ const QuizPage = () => {
                 {lastTest && (
                     <p className="flex w-64 justify-between">
                         <span>
-                            <span className="underline underline-offset-4">Last attempt</span> : {lastTest.lastAttempted.split("T")[0]}
+                            <span className="underline underline-offset-4">Last attempt</span> :{" "}
+                            {UsFormatter.format(new Date(lastTest?.lastAttempted))}
                         </span>
                         <span>
                             <span className="underline underline-offset-4">Score</span>: {lastTest.lastScore}

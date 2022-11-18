@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const classes = {
-    li: "flex flex-col justify-between shadow w-[140px] items-center rounded m-5",
+    li: "flex flex-col justify-between shadow md:w-[135px] items-center rounded m-5",
     name: "w-full p-2 bg-slate-200 text-center",
     button: "bg-fuchsia-900 text-slate-50 p-2 w-full transition hover:bg-fuchsia-700",
     img: "m-5",
@@ -19,7 +19,7 @@ const QuizData = ({ quizzes }) => {
         navigate(`/quiz/${id}`);
     };
     return (
-        <ul className="flex m-5">
+        <ul className="flex md:m-5 flex-wrap justify-center md:justify-start">
             {quizzes &&
                 quizzes.map((quiz) => {
                     return (

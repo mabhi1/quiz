@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const classes = {
@@ -9,14 +9,20 @@ const classes = {
     label: "px-2 text-sm",
 };
 const Reset = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [auth, setAuth] = useState(null);
     useEffect(() => {
         async function getData() {
             try {
                 const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL + "/auth/" + id);
-                if (data.auth) setAuth(data.auth);
+                if (data.auth) {
+                    setAuth(data.auth);
+                } else {
+                    setAuth("notfound");
+                }
             } catch (error) {
+                setAuth("notfound");
                 console.log(error);
             }
         }
@@ -43,12 +49,12 @@ const Reset = () => {
                 }
             );
             alert("Password Successfully changed");
-            setAuth(null);
+            navigate("/signin");
         } catch (error) {
             console.log(error);
         }
     };
-    if (auth) {
+    if (auth && auth !== "notfound") {
         return (
             <div className="flex items-center justify-center m-10">
                 <form onSubmit={handleSubmit} className={classes.form} encType="multipart/form-data">
@@ -65,7 +71,7 @@ const Reset = () => {
                 </form>
             </div>
         );
-    } else {
+    } else if (auth === "notfound") {
         return <div className="flex items-center justify-center m-10 text-lg text-red-900">Not Found</div>;
     }
 };

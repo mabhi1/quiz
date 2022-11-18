@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const classes = {
     label: "block",
-    input: "p-1 px-2 rounded mr-2 bg-slate-200 mb-5 w-96",
+    input: "p-1 px-2 rounded mr-2 bg-slate-200 mb-5 md:w-96",
     input2: "p-1 px-2 rounded mr-2 bg-slate-200 mb-5",
 };
 const EditQuiz = () => {
@@ -121,7 +121,7 @@ const EditQuiz = () => {
                 <label htmlFor="options" className={classes.label}>
                     Options :
                 </label>
-                <ul className="flex">
+                <ul className="flex md:flex-row flex-col">
                     {question.options?.map((option, idx) => {
                         return (
                             <li key={idx}>
