@@ -17,20 +17,20 @@ const session = require("express-session");
 // Middlewares
 const cors = require("cors");
 app.use(
-    cors({
-        origin: process.env.FRONTENDURL,
-        optionsSuccessStatus: 200,
-        credentials: true,
-    })
+  cors({
+    origin: process.env.FRONTENDURL,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
 );
 
 app.use(
-    session({
-        name: "AuthCookie",
-        secret: "sacredword",
-        saveUninitialized: false,
-        resave: false,
-    })
+  session({
+    name: "AuthCookie",
+    secret: "sacredword",
+    saveUninitialized: true,
+    resave: true,
+  })
 );
 
 app.use(express.json());
@@ -42,5 +42,5 @@ routes(app);
 // starting server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log(`Server started at http://localhost:${PORT}/`);
+  console.log(`Server started at http://localhost:${PORT}/`);
 });
