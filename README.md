@@ -2,7 +2,7 @@
 
 A quiz app where users can play quizzes of various programming languages and databases
 
-## Hosted Link - https://quiz-frontend-emay.onrender.com/
+## Hosted Link - https://quiz-app18.netlify.app/
 
 ### A. Mandatory steps
 
