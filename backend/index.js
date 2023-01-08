@@ -29,7 +29,12 @@ app.use(
     name: "AuthCookie",
     secret: "sacredword",
     saveUninitialized: true,
-    resave: true,
+    resave: false,
+    cookie: {
+      secure: true,
+      httpOnly: false,
+      sameSite: "none",
+    },
   })
 );
 
